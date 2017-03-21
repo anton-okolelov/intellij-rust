@@ -11,3 +11,4 @@ class RsRunner : DefaultProgramRunner() {
 
     override fun getRunnerId(): String = "RustRunner"
 }
+
