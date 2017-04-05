@@ -94,7 +94,10 @@ fun processResolveVariants(modDecl: RsModDeclItem, processor: RsResolveProcessor
     for (file in dir.files) {
         if (file == modDecl.containingFile.originalFile || file.name == RsMod.MOD_RS) continue
         val mod = file.rustMod ?: continue
-        val name = FileUtil.getNameWithoutExtension(file.name)
+        val fileName = FileUtil.getNameWithoutExtension(file.name)
+        val modName = modDecl.name
+        // Case-insensitive fs
+        val name = if (modName != null && modName.toLowerCase() == fileName.toLowerCase()) modName else fileName
         if (processor(name, mod)) return true
     }
 
